@@ -1,0 +1,48 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-left{
+    display: flex;
+}
+.header-right{ 
+    display: flex;
+}
+
+.header-item{
+    margin: 10px;
+}
+
+#header-signin-btn{
+    display: none;
+    margin-left: 5px;
+}
+
+.header-adventures{
+    padding: 3px;
+}
+
+.header-signin{
+    display: flex;
+
+    padding: 3px;
+}
+
+.header-menu-icon{
+    padding: 3px
+}
+
+.header-logo-icon{
+    padding: 3px
+}
+
+@media only screen and (min-width: 780px){
+    #header-signin-btn{
+        display: block;
+    }
+
+    .header-signin{
+        border: 1px solid black;
+    }
+}

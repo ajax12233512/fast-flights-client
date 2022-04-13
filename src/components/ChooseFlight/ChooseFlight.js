@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import './ChooseFlight.css'
 import { setFlightInput1, setFlightInput2, setFlightInput3, setFlightInput4, setFlightNumber } from '../../utils/actions'
-import { Duffel } from '@duffel/api';
+
 function ChooseFlight() {
 
     const [travelType, setTravelType] = useState(false);

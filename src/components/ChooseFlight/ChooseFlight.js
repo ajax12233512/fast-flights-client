@@ -82,7 +82,32 @@ function ChooseFlight() {
 
 
     const handleType = (e) => {
+        //Set up autocomplete feature for airport input
+        
         const inputType = e.target.attributes[0].nodeValue;
+        console.log(inputType, e.target.value)
+
+        fetch('api/duffel', {
+            method: 'POST',
+            body: JSON.stringify({
+                input: e.target.value,
+            })
+        })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                data.data.map(item => {
+                    if(item.city_name.includes(e.target.value)){
+                        console.log(item);
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
         switch(inputType) {
             case 'from-input': {
                 let inputString = e.target.value;
@@ -210,7 +235,7 @@ function ChooseFlight() {
             </div>
             <div className='cf-form'>
                 {/* Keep the ID attrubute as the first attribute after `onKeyUp` event listener */}
-                <div className='cf-form-item'>
+                <div className='cf-form-item'>''
                     <input onKeyUp={handleType} id='from-input' type='text' placeholder=''/>
                 </div>
                 <div className='cf-form-item'>

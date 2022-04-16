@@ -87,8 +87,11 @@ function ChooseFlight() {
         const inputType = e.target.attributes[0].nodeValue;
         console.log(inputType, e.target.value)
 
-        fetch('api/duffel', {
+        fetch('api/search', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 input: e.target.value,
             })
@@ -98,8 +101,8 @@ function ChooseFlight() {
             })
             .then(data => {
                 console.log(data)
-                data.data.map(item => {
-                    if(item.city_name.includes(e.target.value)){
+                data.map(item => {
+                    if(item.name.includes(e.target.value)){
                         console.log(item);
                     }
                 })
@@ -235,7 +238,7 @@ function ChooseFlight() {
             </div>
             <div className='cf-form'>
                 {/* Keep the ID attrubute as the first attribute after `onKeyUp` event listener */}
-                <div className='cf-form-item'>''
+                <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='from-input' type='text' placeholder=''/>
                 </div>
                 <div className='cf-form-item'>

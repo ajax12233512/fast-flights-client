@@ -11,6 +11,9 @@ function ChooseFlight() {
 
     const dispatch = useDispatch();
 
+    //Auto-fill the flight options
+    const [flightOptions, setFlightOptions] = useState([]);
+
     //Flight type state
     const flightTypeState = useSelector(state => state.flightType);
 
@@ -83,7 +86,6 @@ function ChooseFlight() {
 
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
-        
         const inputType = e.target.attributes[0].nodeValue;
         console.log(inputType, e.target.value)
 
@@ -100,12 +102,9 @@ function ChooseFlight() {
                 return res.json()
             })
             .then(data => {
-                console.log(data)
-                data.map(item => {
-                    if(item.name.includes(e.target.value)){
-                        console.log(item);
-                    }
-                })
+                const newArray = data.slice(0, 5);
+                console.log(newArray);
+                setFlightOptions(newArray);
             })
             .catch(err => {
                 console.log(err);
@@ -135,9 +134,17 @@ function ChooseFlight() {
             default: {
 
             }
-        }
-        
+        }   
     }
+
+    const fillFlightOptions = (array) => {
+        return array.map((item, index) => {
+            if(item === null) return null
+            return (
+                <li key={index}>{item.name}</li>
+            )
+        }
+    )}
 
     return (
         <div className='cf-container'>
@@ -240,15 +247,27 @@ function ChooseFlight() {
                 {/* Keep the ID attrubute as the first attribute after `onKeyUp` event listener */}
                 <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='from-input' type='text' placeholder=''/>
+                    <ul className='form-item-dropdown'>
+                        {flightOptions === null ? null : fillFlightOptions(flightOptions)} 
+                    </ul>
                 </div>
                 <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='to-input' type='text' placeholder=''/>
+                    <ul className='form-item-dropdown'>
+
+                    </ul>
                 </div>
                 <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='leave-input' type='text' placeholder=''/>
+                    <ul className='form-item-dropdown'>
+
+                    </ul>
                 </div>
                 <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='arrive-input' type='text' placeholder=''/>
+                    <ul className='form-item-dropdown'>
+
+                    </ul>
                 </div>
             </div>
             <div className='cf-btn'>

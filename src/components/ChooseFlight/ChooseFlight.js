@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import './ChooseFlight.css'
 import { setFlightInput1, setFlightInput2, setFlightInput3, setFlightInput4, setFlightNumber } from '../../utils/actions'
+import { fillFlightOptionsArrive, fillFlightOptionsDepart } from './utils/index.js'
+import { tabStyle } from './utils/styles.js'
 
 function ChooseFlight() {
-
     const [travelType, setTravelType] = useState(false);
     const [travelNumber, setTravelNumber] = useState(false);
     const [travelClass, setTravelClass] = useState(false);
@@ -12,7 +13,8 @@ function ChooseFlight() {
     const dispatch = useDispatch();
 
     //Auto-fill the flight options
-    const [flightOptions, setFlightOptions] = useState([]);
+    const [flightOptionsDepart, setFlightOptionsDepart] = useState([]);
+    const [flightOptionsArrive, setFlightOptionsArrive] = useState([]);
 
     //Flight type state
     const flightTypeState = useSelector(state => state.flightType);
@@ -39,7 +41,7 @@ function ChooseFlight() {
 
     const handleClick = (e) => {
         const elementClassName = e.target.parentElement.attributes.class.nodeValue; //ul next to h3
-        if(elementClassName.includes('triptype')) { //If user clicke flight type
+        if(elementClassName.includes('triptype')) { //If user click flight type
             setTravelType(!travelType)
             setTravelNumber(false)
             setTravelClass(false)
@@ -56,10 +58,10 @@ function ChooseFlight() {
         }
     }
 
-    const tabStyle = {
-        'backgroundColor': 'rgb(54,81,94)',
-        'color': 'white'
-    }
+    // const tabStyle = {
+    //     'backgroundColor': 'rgb(54,81,94)',
+    //     'color': 'white'
+    // }
 
     const handleTripTypeChange = (e) => {
         dispatch({ type: 'SET_FLIGHT_TYPE', payload : e.target.attributes.value.value })
@@ -87,7 +89,7 @@ function ChooseFlight() {
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
         const inputType = e.target.attributes[0].nodeValue;
-        console.log(inputType, e.target.value)
+        console.log(inputType, e.target.nextElementSibling)
 
         fetch('api/search', {
             method: 'POST',
@@ -103,8 +105,8 @@ function ChooseFlight() {
             })
             .then(data => {
                 const newArray = data.slice(0, 5);
-                console.log(newArray);
-                setFlightOptions(newArray);
+                // console.log(newArray);
+                inputType === 'to-input' ? setFlightOptionsArrive(newArray) : setFlightOptionsDepart(newArray)
             })
             .catch(err => {
                 console.log(err);
@@ -136,15 +138,6 @@ function ChooseFlight() {
             }
         }   
     }
-
-    const fillFlightOptions = (array) => {
-        return array.map((item, index) => {
-            if(item === null) return null
-            return (
-                <li key={index}>{item.name}</li>
-            )
-        }
-    )}
 
     return (
         <div className='cf-container'>
@@ -248,13 +241,13 @@ function ChooseFlight() {
                 <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='from-input' type='text' placeholder=''/>
                     <ul className='form-item-dropdown'>
-                        {flightOptions === null ? null : fillFlightOptions(flightOptions)} 
+                        {flightOptionsDepart === null ? null : fillFlightOptionsDepart(flightOptionsDepart)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
                     <input onKeyUp={handleType} id='to-input' type='text' placeholder=''/>
                     <ul className='form-item-dropdown'>
-
+                        {flightOptionsArrive === null ? null : fillFlightOptionsArrive(flightOptionsArrive)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>

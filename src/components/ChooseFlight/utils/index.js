@@ -16,4 +16,16 @@ export const fillFlightOptionsArrive = (array) => {
     }
 )}
 
+export const  delay = (fn, ms) => {
+    let timer = 0
+    return function(...args) {
+      clearTimeout(timer)
+      timer = setTimeout(fn.bind(this, ...args), ms || 0)
+    }
+  }
+
+export const handleSubmit = (e, obj) => {
+    console.log(obj)
+}
+
 

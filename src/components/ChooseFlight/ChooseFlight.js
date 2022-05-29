@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import './ChooseFlight.css'
 import { setFlightInput1, setFlightInput2, setFlightInput3, setFlightInput4, setFlightNumber } from '../../utils/actions'
 import { fillFlightOptionsArrive, fillFlightOptionsDepart } from './utils/index.js'
-import { tabStyle } from './utils/styles.js'
+import { tabStyle } from './utils/styles.js';
+import { delay, handleSubmit } from './utils/index.js';
+
 
 function ChooseFlight() {
+    
     const [travelType, setTravelType] = useState(false);
     const [travelNumber, setTravelNumber] = useState(false);
     const [travelClass, setTravelClass] = useState(false);
@@ -38,6 +41,27 @@ function ChooseFlight() {
 
     //Flight class state
     const flightClassState = useSelector(state => state.flightClass);
+    //Flight Form State
+    const depatureCity = useSelector(state => state.origin);
+    const arriveCity = useSelector(state => state.destination);
+    const returnDate = useSelector(state => state.returnDate);
+    const departureDate = useSelector(state => state.departureDate);
+
+    const flightData = {
+        flightTypeState,
+        flightAdultState,
+        flightStudentState,
+        flightSeniorState,
+        flightYouthState,
+        flightChildrenState,
+        flightToddlerState,
+        flightInfantState,
+        flightClassState,
+        depatureCity,
+        arriveCity,
+        returnDate,
+        departureDate
+    }
 
     const handleClick = (e) => {
         const elementClassName = e.target.parentElement.attributes.class.nodeValue; //ul next to h3
@@ -57,11 +81,6 @@ function ChooseFlight() {
             setTravelNumber(false)
         }
     }
-
-    // const tabStyle = {
-    //     'backgroundColor': 'rgb(54,81,94)',
-    //     'color': 'white'
-    // }
 
     const handleTripTypeChange = (e) => {
         dispatch({ type: 'SET_FLIGHT_TYPE', payload : e.target.attributes.value.value })
@@ -89,28 +108,6 @@ function ChooseFlight() {
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
         const inputType = e.target.attributes[0].nodeValue;
-        console.log(inputType, e.target.nextElementSibling)
-
-        fetch('api/search', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                input: e.target.value,
-            })
-        })
-            .then(res => {
-                return res.json()
-            })
-            .then(data => {
-                const newArray = data.slice(0, 5);
-                // console.log(newArray);
-                inputType === 'to-input' ? setFlightOptionsArrive(newArray) : setFlightOptionsDepart(newArray)
-            })
-            .catch(err => {
-                console.log(err);
-            })
 
         switch(inputType) {
             case 'from-input': {
@@ -138,6 +135,8 @@ function ChooseFlight() {
             }
         }   
     }
+
+
 
     return (
         <div className='cf-container'>
@@ -239,32 +238,32 @@ function ChooseFlight() {
             <div className='cf-form'>
                 {/* Keep the ID attrubute as the first attribute after `onKeyUp` event listener */}
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='from-input' type='text' placeholder=''/>
+                    <input onKeyUp={handleType} id='from-input' type='text' placeholder='From'/>
                     <ul className='form-item-dropdown'>
                         {flightOptionsDepart === null ? null : fillFlightOptionsDepart(flightOptionsDepart)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='to-input' type='text' placeholder=''/>
+                    <input onKeyUp={handleType} id='to-input' type='text' placeholder='To'/>
                     <ul className='form-item-dropdown'>
                         {flightOptionsArrive === null ? null : fillFlightOptionsArrive(flightOptionsArrive)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='leave-input' type='text' placeholder=''/>
+                    <input onKeyUp={handleType} id='leave-input' type='text' placeholder='Departure Date'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='arrive-input' type='text' placeholder=''/>
+                    <input onKeyUp={handleType} id='arrive-input' type='text' placeholder='Arrive Date'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>
                 </div>
             </div>
             <div className='cf-btn'>
-                <button>Search Flights</button>
+                <button onClick={e => handleSubmit(e, flightData)} type='submit'>Search Flights</button>
             </div>
         </div>
     )

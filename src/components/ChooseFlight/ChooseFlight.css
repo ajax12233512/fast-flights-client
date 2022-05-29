@@ -9,7 +9,15 @@
 }
 
 .filter-item{
-    padding: 0 5px;
+    box-sizing: border-box;
+    margin: 0 5px;
+    padding: 10px;
+}
+
+.filter-item:hover{
+    background-color: #1a1a1a;
+    border: 1px solid black;
+    color: white;
 }
 
 .filter-item h3{
@@ -91,6 +99,10 @@
     padding: 10px 0;
 }
 
+.cf-filters-triptype ul li:hover{
+    background-color: rgba(34, 133, 182, 0.3);
+}
+
 .cf-filters-triptype h3{
     font-weight: 400;
 }
@@ -153,6 +165,10 @@
     border-bottom: 1px solid white;
     font-size: 15px;
     padding: 10px 0;
+}
+
+.cf-filters-class ul li:hover{
+    background-color: rgba(34, 133, 182, 0.3);
 }
 
 .filter-item ul li div:first-child {

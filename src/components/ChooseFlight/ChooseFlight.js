@@ -60,7 +60,8 @@ function ChooseFlight() {
         depatureCity,
         arriveCity,
         returnDate,
-        departureDate
+        departureDate,
+        flightTotalPassenger
     }
 
     const handleClick = (e) => {
@@ -144,16 +145,16 @@ function ChooseFlight() {
                 <h2>Search your perfect flight</h2>
             </div>
             <div className='cf-filters'>
-                <div className='cf-filters-triptype filter-item'>
-                    <h3 style={travelType ? tabStyle : null} onClick={handleClick}>{flightTypeState.toUpperCase()}</h3>
+                <div style={travelType ? tabStyle : null} className='cf-filters-triptype filter-item'>
+                    <h3  onClick={handleClick}>{flightTypeState.toUpperCase()}</h3>
                     <ul className={travelType ? 'cf-show' : 'cf-hide'}>
                         <li onClick={handleTripTypeChange} value='one-way'>One-Way</li>
                         <li onClick={handleTripTypeChange} value='round-trip'>Round-Trip</li>
                         <li onClick={handleTripTypeChange} value='multi-city'>Multi-City</li>
                     </ul>
                 </div>
-                <div className='cf-filters-travelers filter-item'>
-                    <h3 style={travelNumber ? tabStyle : null} 
+                <div  style={travelNumber ? tabStyle : null}className='cf-filters-travelers filter-item'>
+                    <h3 
                         onClick={handleClick}>{flightTotalPassenger === 1 ? 
                             '1 Traveler' :
                             `${flightTotalPassenger} Travelers`}
@@ -224,8 +225,8 @@ function ChooseFlight() {
                         </li>
                     </ul>
                 </div>
-                <div className='cf-filters-class filter-item'>
-                    <h3 style={travelClass ? tabStyle : null} onClick={handleClick}>{flightClassState}</h3>
+                <div style={travelClass ? tabStyle : null} className='cf-filters-class filter-item'>
+                    <h3  onClick={handleClick}>{flightClassState}</h3>
                     <ul className={travelClass ? 'cf-show' : 'cf-hide'}>
                         <li value='economy' onClick={handleTripClassChange}>Economy</li>
                         <li value='premium-economy' onClick={handleTripClassChange}>Premium-Economy</li>
@@ -263,7 +264,7 @@ function ChooseFlight() {
                 </div>
             </div>
             <div className='cf-btn'>
-                <button onClick={e => handleSubmit(e, flightData)} type='submit'>Search Flights</button>
+                <button onClick={e => {handleSubmit(e, flightData)}} type='submit'>Search Flights</button>
             </div>
         </div>
     )

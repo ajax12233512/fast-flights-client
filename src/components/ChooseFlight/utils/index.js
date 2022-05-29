@@ -25,6 +25,7 @@ export const  delay = (fn, ms) => {
   }
 
 export const handleSubmit = (e, obj) => {
+    if(obj.flightTotalPassenger === 0) { return console.log('need passengers') }
     console.log(obj)
 }
 

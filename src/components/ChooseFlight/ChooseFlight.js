@@ -270,7 +270,10 @@ function ChooseFlight() {
             <div className='cf-form'>
                 {/* Keep the ID      attrubute as the first attribute after `onKeyUp` event listener */}
                 <div className='cf-form-item'>
-                    <input onKeyUp={delay((e) => handleType(e), 1000)} id='from-input' className='cf-form-input' type='text' placeholder='From'/>
+                    <div>
+                        <input onKeyUp={delay((e) => handleType(e), 1000)} id='from-input' className='cf-form-input' type='text' placeholder='From'/>
+                        {/* Set On-click event to correcly display iata code inside input field for good ui experience */}
+                    </div>
                     <ul className='form-item-dropdown'>
                         {flightOptionsDepart === null ? null : fillFlightOptionsDepart(flightOptionsDepart)} 
                     </ul>

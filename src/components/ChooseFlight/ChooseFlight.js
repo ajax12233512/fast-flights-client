@@ -4,7 +4,7 @@ import './ChooseFlight.css'
 import { setFlightInput1, setFlightInput2, setFlightInput3, setFlightInput4, setFlightNumber } from '../../utils/actions'
 import { fillFlightOptionsArrive, fillFlightOptionsDepart } from './utils/index.js'
 import { tabStyle } from './utils/styles.js';
-import { delay, handleSubmit } from './utils/index.js';
+import { handleSubmit } from './utils/index.js';
 
 
 function ChooseFlight() {
@@ -109,7 +109,7 @@ function ChooseFlight() {
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
         const inputType = e.target.attributes[0].nodeValue;
-
+        console.log('dely is working')
         switch(inputType) {
             case 'from-input': {
                 let inputString = e.target.value;
@@ -137,6 +137,15 @@ function ChooseFlight() {
         }   
     }
 
+    const delay = (fn, ms) => {
+        let timer = 0
+        return function(...args) {
+          clearTimeout(timer)
+          timer = setTimeout(fn.bind(this, ...args), ms || 0)
+        }
+      }
+
+      
 
 
     return (
@@ -237,27 +246,27 @@ function ChooseFlight() {
                 </div>
             </div>
             <div className='cf-form'>
-                {/* Keep the ID attrubute as the first attribute after `onKeyUp` event listener */}
+                {/* Keep the ID      attrubute as the first attribute after `onKeyUp` event listener */}
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='from-input' type='text' placeholder='From'/>
+                    <input onKeyUp={delay((e) => handleType(e), 1000)} id='from-input' className='cf-form-input' type='text' placeholder='From'/>
                     <ul className='form-item-dropdown'>
                         {flightOptionsDepart === null ? null : fillFlightOptionsDepart(flightOptionsDepart)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='to-input' type='text' placeholder='To'/>
+                    <input onKeyUp={delay((e) => handleType(e), 1000)}  id='to-input'  className='cf-form-input' type='text' placeholder='To'/>
                     <ul className='form-item-dropdown'>
                         {flightOptionsArrive === null ? null : fillFlightOptionsArrive(flightOptionsArrive)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='leave-input' type='text' placeholder='Departure Date'/>
+                    <input onKeyUp={delay((e) => handleType(e), 1000)}  id='leave-input' className='cf-form-input' type='text' placeholder='Departure Date'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={handleType} id='arrive-input' type='text' placeholder='Arrive Date'/>
+                    <input onKeyUp={delay((e) => handleType(e), 1000)}  id='arrive-input' className='cf-form-input' type='text' placeholder='Arrive Date'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>

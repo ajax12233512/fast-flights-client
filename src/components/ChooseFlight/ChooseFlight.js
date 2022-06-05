@@ -109,7 +109,29 @@ function ChooseFlight() {
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
         const inputType = e.target.attributes[0].nodeValue;
-        console.log('dely is working')
+        
+        const fetchAirports = fetch('api/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                input: e.target.value,
+            })
+        })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                const newArray = data.slice(0, 5);
+                // console.log(newArray);
+                inputType === 'to-input' ? setFlightOptionsArrive(newArray) : setFlightOptionsDepart(newArray)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
         switch(inputType) {
             case 'from-input': {
                 let inputString = e.target.value;
@@ -260,13 +282,13 @@ function ChooseFlight() {
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={delay((e) => handleType(e), 1000)}  id='leave-input' className='cf-form-input' type='text' placeholder='Departure Date'/>
+                    <input onKeyUp={null}  id='leave-input' className='cf-form-input' type='text' placeholder='Departure Date'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={delay((e) => handleType(e), 1000)}  id='arrive-input' className='cf-form-input' type='text' placeholder='Arrive Date'/>
+                    <input onKeyUp={null}  id='arrive-input' className='cf-form-input' type='text' placeholder='Arrive Date'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>

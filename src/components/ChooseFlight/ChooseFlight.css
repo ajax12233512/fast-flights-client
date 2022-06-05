@@ -200,6 +200,11 @@
     border: 1px solid red;
 }
 
+.list-fill-options:hover{
+    background-color: rgba(0, 0, 0, 0.102);
+    color: white;
+}
+
 @media screen and (min-width: 600px) {
     .cf-form{
         display: grid;

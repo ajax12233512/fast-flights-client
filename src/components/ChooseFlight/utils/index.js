@@ -1,8 +1,15 @@
+const fillStyle = {
+    listStyle: 'none',
+    borderBottom: '1px solid #ccc',
+    margin: '2%',
+    cursor: 'pointer',
+}
+
 export const fillFlightOptionsDepart = (array) => {
     return array.map((item, index) => {
         if(item === null) return null
         return (
-            <li key={index}>{item.name}</li>
+            <li className="list-fill-options" data-iata={item.iata_code} style={fillStyle} key={index}>{item.name}</li>
         )
     }
 )}
@@ -11,7 +18,7 @@ export const fillFlightOptionsArrive = (array) => {
     return array.map((item, index) => {
         if(item === null) return null
         return (
-            <li key={index}>{item.name}</li>
+            <li style={fillStyle} key={index}>{item.name}</li>
         )
     }
 )}

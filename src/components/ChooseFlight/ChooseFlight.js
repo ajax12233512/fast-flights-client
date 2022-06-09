@@ -64,6 +64,10 @@ function ChooseFlight() {
         flightTotalPassenger
     }
 
+    //Auto-fill the loading state
+    const [searchLoadingFrom, setSearchLoadingFrom] = useState(false);
+    const [searchLoadingTo, setSearchLoadingTo] = useState(false);
+
     const handleClick = (e) => {
         const elementClassName = e.target.parentElement.attributes.class.nodeValue; //ul next to h3
         if(elementClassName.includes('triptype')) { //If user click flight type
@@ -109,6 +113,11 @@ function ChooseFlight() {
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
         const inputType = e.target.attributes[0].nodeValue;
+        if(inputType === 'from-input'){
+            setSearchLoadingFrom(true);
+        } else {
+            setSearchLoadingTo(true);
+        }
         
         const fetchAirports = fetch('api/search', {
             method: 'POST',
@@ -126,10 +135,14 @@ function ChooseFlight() {
                 console.log(data)
                 const newArray = data.slice(0, 5);
                 // console.log(newArray);
-                inputType === 'to-input' ? setFlightOptionsArrive(newArray) : setFlightOptionsDepart(newArray)
+                inputType === 'to-input' ? setFlightOptionsArrive(newArray) : setFlightOptionsDepart(newArray);
+                setSearchLoadingFrom(false);
+                setSearchLoadingTo(false);
             })
             .catch(err => {
                 console.log(err);
+                setSearchLoadingFrom(false);
+                setSearchLoadingTo(false);
             })
 
         switch(inputType) {
@@ -270,16 +283,19 @@ function ChooseFlight() {
             <div className='cf-form'>
                 {/* Keep the ID      attrubute as the first attribute after `onKeyUp` event listener */}
                 <div className='cf-form-item'>
-                    <div>
-                        <input onKeyUp={delay((e) => handleType(e), 1000)} id='from-input' className='cf-form-input' type='text' placeholder='From'/>
-                        {/* Set On-click event to correcly display iata code inside input field for good ui experience */}
+                    <div className='input-item_loading'>
+                        <input onKeyUp={delay((e) => handleType(e), 500)} id='from-input' className='cf-form-input' type='text' placeholder='From'/>
+                        <span>{searchLoadingFrom ? <i className='fas fa-spinner fa-spin'></i> : null}</span>
                     </div>
                     <ul className='form-item-dropdown'>
                         {flightOptionsDepart === null ? null : fillFlightOptionsDepart(flightOptionsDepart)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={delay((e) => handleType(e), 1000)}  id='to-input'  className='cf-form-input' type='text' placeholder='To'/>
+                    <div className='input-item_loading'>
+                        <input onKeyUp={delay((e) => handleType(e), 500)}  id='to-input'  className='cf-form-input' type='text' placeholder='To'/>
+                        <span>{searchLoadingTo ? <i className='fas fa-spinner fa-spin'></i> : null}</span>
+                    </div>
                     <ul className='form-item-dropdown'>
                         {flightOptionsArrive === null ? null : fillFlightOptionsArrive(flightOptionsArrive)} 
                     </ul>

@@ -8,3 +8,7 @@ Baby Blue : rgb(0.54,0.81,0.94)
   padding: 0;
   box-sizing: border-box;
 }
+
+input:focus{
+  outline: none;
+}

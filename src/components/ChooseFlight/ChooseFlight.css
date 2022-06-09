@@ -205,6 +205,19 @@
     color: white;
 }
 
+.input-item_loading{
+    display: flex;
+    align-items: center;    
+    background-color: white;
+}
+
+.input-item_loading span{
+    display: block;
+    color: black;
+    text-align: center;
+    width: 20%;
+}
+
 @media screen and (min-width: 600px) {
     .cf-form{
         display: grid;

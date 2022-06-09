@@ -5,11 +5,20 @@ const fillStyle = {
     cursor: 'pointer',
 }
 
+const handleListClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const iata = e.target.dataset.iata;
+    e.target.parentElement.previousElementSibling.firstChild.value = iata;
+    //Somehow delete the list
+    
+}
+
 export const fillFlightOptionsDepart = (array) => {
     return array.map((item, index) => {
         if(item === null) return null
         return (
-            <li className="list-fill-options" data-iata={item.iata_code} style={fillStyle} key={index}>{item.name}</li>
+            <li onClick={handleListClick} className="list-fill-options" data-iata={item.iata_code} style={fillStyle} key={index}>{item.name}</li>
         )
     }
 )}
@@ -18,7 +27,7 @@ export const fillFlightOptionsArrive = (array) => {
     return array.map((item, index) => {
         if(item === null) return null
         return (
-            <li style={fillStyle} key={index}>{item.name}</li>
+            <li onClick={handleListClick} className="list-fill-options" data-iata={item.iata_code} style={fillStyle} key={index}>{item.name}</li>
         )
     }
 )}

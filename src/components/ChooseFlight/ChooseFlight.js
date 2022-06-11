@@ -113,6 +113,7 @@ function ChooseFlight() {
     const handleType = (e) => {
         //Set up autocomplete feature for airport input
         e.target.parentElement.nextElementSibling.style.display = 'block';
+        //TODO: see if you can set the default display of <ul> to none
         const inputType = e.target.attributes[0].nodeValue;
         if(inputType === 'from-input'){
             setSearchLoadingFrom(true);

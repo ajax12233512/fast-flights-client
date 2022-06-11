@@ -48,6 +48,22 @@ function ChooseFlight() {
     const departureDate = useSelector(state => state.departureDate);
 
     const flightData = {
+      slices: [
+        {
+            origin: depatureCity,
+            destination: arriveCity,
+            departure_date: departureDate
+        },
+        {
+            origin: arriveCity,
+            destination: depatureCity,
+            departure_date: returnDate
+        },
+      ],
+      //TODO: Finish request object to send to server
+        passengers: {},
+        cabin_class: '',
+        return_offers: true,
         flightTypeState,
         flightAdultState,
         flightStudentState,
@@ -62,8 +78,8 @@ function ChooseFlight() {
         returnDate,
         departureDate,
         flightTotalPassenger
+        
     }
-
     //Auto-fill the loading state
     const [searchLoadingFrom, setSearchLoadingFrom] = useState(false);
     const [searchLoadingTo, setSearchLoadingTo] = useState(false);
@@ -106,7 +122,7 @@ function ChooseFlight() {
     }
 
     useEffect(() => {
-        
+
     }, [])
 
 
@@ -182,7 +198,15 @@ function ChooseFlight() {
         }
       }
 
-      
+      const setReduxIataCode = (e) => {
+        const inputType = e.target.parentElement.previousElementSibling.firstChild.attributes.id.value
+        const iata = e.target.dataset.iata
+        if(inputType === 'from-input'){
+            dispatch(setFlightInput1(iata, inputType))
+        } else {
+            dispatch(setFlightInput2(iata, inputType))
+        }
+      }
 
 
     return (
@@ -289,7 +313,7 @@ function ChooseFlight() {
                         <input onKeyUp={delay((e) => handleType(e), 500)} id='from-input' className='cf-form-input' type='text' placeholder='From'/>
                         <span>{searchLoadingFrom ? <i className='fas fa-spinner fa-spin'></i> : null}</span>
                     </div>
-                    <ul className='form-item-dropdown'>
+                    <ul onClick={setReduxIataCode} className='form-item-dropdown'>
                         {flightOptionsDepart === null ? null : fillFlightOptionsDepart(flightOptionsDepart)} 
                     </ul>
                 </div>
@@ -298,18 +322,18 @@ function ChooseFlight() {
                         <input onKeyUp={delay((e) => handleType(e), 500)}  id='to-input'  className='cf-form-input' type='text' placeholder='To'/>
                         <span>{searchLoadingTo ? <i className='fas fa-spinner fa-spin'></i> : null}</span>
                     </div>
-                    <ul className='form-item-dropdown'>
+                    <ul onClick={setReduxIataCode} className='form-item-dropdown'>
                         {flightOptionsArrive === null ? null : fillFlightOptionsArrive(flightOptionsArrive)} 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={null}  id='leave-input' className='cf-form-input' type='text' placeholder='Departure Date'/>
+                    <input onKeyUp={null}  id='leave-input' className='cf-form-input' type='text' placeholder='Departure Date yyyy/dd/mm'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>
                 </div>
                 <div className='cf-form-item'>
-                    <input onKeyUp={null}  id='arrive-input' className='cf-form-input' type='text' placeholder='Arrive Date'/>
+                    <input onKeyUp={null}  id='arrive-input' className='cf-form-input' type='text' placeholder='Arrive Date yyyy/dd/mm'/>
                     <ul className='form-item-dropdown'>
 
                     </ul>

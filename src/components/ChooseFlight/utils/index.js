@@ -1,3 +1,5 @@
+
+
 const fillStyle = {
     listStyle: 'none',
     borderBottom: '1px solid #ccc',
@@ -5,9 +7,9 @@ const fillStyle = {
     cursor: 'pointer',
 }
 
+
 const handleListClick = (e) => {
     e.preventDefault();
-    e.stopPropagation();
     const iata = e.target.dataset.iata; // iata code
     e.target.parentElement.previousElementSibling.firstChild.value = iata;//Set input value to the clicked IATA code
     e.target.parentElement.style.display = 'none'; //Hide the list

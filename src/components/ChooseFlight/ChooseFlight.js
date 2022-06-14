@@ -4,7 +4,7 @@ import './ChooseFlight.css'
 import { setFlightInput1, setFlightInput2, setFlightInput3, setFlightInput4, setFlightNumber } from '../../utils/actions'
 import { fillFlightOptionsArrive, fillFlightOptionsDepart } from './utils/index.js'
 import { tabStyle } from './utils/styles.js';
-import { handleSubmit } from './utils/index.js';
+import { handleSubmit, childrenAgeCapture } from './utils/index.js';
 
 
 function ChooseFlight() {
@@ -37,7 +37,8 @@ function ChooseFlight() {
                                 flightChildrenState +
                                 flightToddlerState +
                                 flightInfantState;
-                                
+    const flightTotalAdult = flightAdultState + flightStudentState + flightSeniorState;
+    const flightTotalChildren = flightChildrenState + flightToddlerState + flightInfantState + flightYouthState;                    
 
     //Flight class state
     const flightClassState = useSelector(state => state.flightClass);
@@ -46,6 +47,16 @@ function ChooseFlight() {
     const arriveCity = useSelector(state => state.destination);
     const returnDate = useSelector(state => state.returnDate);
     const departureDate = useSelector(state => state.departureDate);
+
+    const passengers = []
+
+    for(let i = 0; i < flightAdultState + flightStudentState + flightSeniorState; i++) {
+        passengers.push({ type: 'adult' })
+    }
+
+    for(let i = 0; i < flightChildrenState + flightInfantState + flightYouthState + flightToddlerState; i++) {
+        passengers.push({ type: 'child' })
+    }
 
     const flightData = {
       slices: [
@@ -61,24 +72,9 @@ function ChooseFlight() {
         },
       ],
       //TODO: Finish request object to send to server
-        passengers: {},
-        cabin_class: '',
-        return_offers: true,
-        flightTypeState,
-        flightAdultState,
-        flightStudentState,
-        flightSeniorState,
-        flightYouthState,
-        flightChildrenState,
-        flightToddlerState,
-        flightInfantState,
-        flightClassState,
-        depatureCity,
-        arriveCity,
-        returnDate,
-        departureDate,
-        flightTotalPassenger
-        
+      passengers,
+      cabin_class: flightClassState,
+      return_offers: true,   
     }
     //Auto-fill the loading state
     const [searchLoadingFrom, setSearchLoadingFrom] = useState(false);
@@ -216,7 +212,7 @@ function ChooseFlight() {
             </div>
             <div className='cf-filters'>
                 <div style={travelType ? tabStyle : null} className='cf-filters-triptype filter-item'>
-                    <h3  onClick={handleClick}>{flightTypeState.toUpperCase()}</h3>
+                    <h3 onClick={handleClick}>{flightTypeState.toUpperCase()}</h3>
                     <ul className={travelType ? 'cf-show' : 'cf-hide'}>
                         <li onClick={handleTripTypeChange} value='one-way'>One-Way</li>
                         <li onClick={handleTripTypeChange} value='round-trip'>Round-Trip</li>
@@ -306,6 +302,7 @@ function ChooseFlight() {
                     </ul>
                 </div>
             </div>
+            { flightTotalChildren > 0 ? <div className='children-ages-ctn'><strong>Children Ages</strong>{childrenAgeCapture(flightTotalChildren)}</div> : null }
             <div className='cf-form'>
                 {/* Keep the ID      attrubute as the first attribute after `onKeyUp` event listener */}
                 <div className='cf-form-item'>

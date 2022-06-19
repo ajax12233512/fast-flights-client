@@ -1,4 +1,5 @@
-
+import React from "react";
+import { useState } from "react";
 
 const fillStyle = {
     listStyle: 'none',
@@ -53,9 +54,11 @@ const childrenAgeCaptureStyle = {
 export const childrenAgeCapture = (numOfChildren) => {
     const array = [];
     for(let i = 0; i < numOfChildren; i++) {
+        let age = 0;
+
         array.push(<div className="child-form-group" key={i}>
             <label htmlFor="child-age">Age</label>
-            <input type="number" name="child-age" id="child-age"/>
+            <input type='number' name='child-age' id="child-age" min='0'/>
         </div>)
     }
     return array;

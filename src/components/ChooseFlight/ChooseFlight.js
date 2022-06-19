@@ -55,7 +55,7 @@ function ChooseFlight() {
     }
 
     for(let i = 0; i < flightChildrenState + flightInfantState + flightYouthState + flightToddlerState; i++) {
-        passengers.push({ type: 'child' })
+        passengers.push({ age: 'child' })
     }
 
     const flightData = {

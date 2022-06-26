@@ -5,10 +5,18 @@ import FlightClass from './FlightClass/FlightClass';
 import Travelers from './Travelers/Travelers';
 import FormItemLoad from './utils/FormItemLoad';
 import FormItem from './utils/FormItem';
-
+import { useSelector } from 'react-redux';
+import { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
+import ChildAge from './utils/ChildAge';
 function ChooseFlight() {
     
     //TODO: Componetize this
+    const minors = useSelector(selectMinor)
+    let minorsList = [];
+
+    for(let i = 0; i < minors; i++){
+        minorsList.push(<ChildAge />)
+    }
 
     return (
         <div className='cf-container'>
@@ -20,7 +28,7 @@ function ChooseFlight() {
                 <Travelers />
                 <FlightClass />
             </div>
-            {/* { flightTotalChildren > 0 ? <div className='children-ages-ctn'><strong>Children Ages</strong>{childrenAgeCapture(flightTotalChildren)}</div> : null } */}
+            { minors > 0 ? minorsList.map(item => item) : null }
             <div className='cf-form'>
                 {/* Keep the ID      attrubute as the first attribute after `onKeyUp` event listener */}
                 <FormItemLoad id='from-input' placeholder='From' />

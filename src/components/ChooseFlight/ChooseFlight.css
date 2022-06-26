@@ -243,8 +243,28 @@
     font-size: 1.5rem;
 }
 
-.children-ages-ctn{
+.children-ages-ctn span{
+    margin: 0 20%;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
 
+.children-ages-ctn div{
+    margin: 0 1%;
+}
+
+.children-ages-ctn{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.445);
+    width: 50%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.child-age{
+    font-size: 1.4rem;
 }
 
 @media screen and (min-width: 600px) {

@@ -5,6 +5,8 @@ import minorReducer from './BookingStates/passengers/minorSlice'
 import adultsReducer from './BookingStates/passengers/adultsSlice'
 import originReducer from './BookingStates/originSlice'
 import destinationReducer from './BookingStates/destinationSlice'
+import leaveDateReducer from './BookingStates/datesStates/leaveDateSlice'
+import returnDateReducer from './BookingStates/datesStates/returnDateSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +16,7 @@ export const store = configureStore({
     adults: adultsReducer,
     origin: originReducer,
     destination: destinationReducer,
-  },
+    leaveDate: leaveDateReducer,
+    returnDate: returnDateReducer,
+  }
 })

@@ -267,11 +267,21 @@
     font-size: 1.4rem;
 }
 
+.form-item-list_load{
+    cursor: pointer;
+    list-style: none;
+}
+
+.form-item-list_load:hover{
+    background-color: rgba(0, 0, 0, 0.445);
+    color: white;
+}
+
 @media screen and (min-width: 600px) {
     .cf-form{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 }
 

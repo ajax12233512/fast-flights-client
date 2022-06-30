@@ -22,8 +22,8 @@ function Travelers() {
   // ]
 
   const travelers2 = [
-    <li><TravelersFragment value={adults} title='Adults' ages='18-64' /></li>,
-    <li><TravelersFragment value={minors} title='Minors' ages='0-17' /></li>
+    <li key={0}><TravelersFragment value={adults} title='Adults' ages='18-64' /></li>,
+    <li key={1}><TravelersFragment value={minors} title='Minors' ages='0-17' /></li>
   ]
 
   return (

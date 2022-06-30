@@ -14,11 +14,11 @@ function FlightClass() {
   }
 
   const classes = [
-    <li onClick={handleClass} value='economy'>Economy</li>,
-    <li onClick={handleClass} value='premium-economy'>Premium-Economy</li>,
-    <li onClick={handleClass} value='business'>Business</li>,
-    <li onClick={handleClass} value='first'>First</li>,
-    <li onClick={handleClass} value='multiple'>Multiple</li>
+    <li key={0} onClick={handleClass} value='economy'>Economy</li>,
+    <li key={1} onClick={handleClass} value='premium-economy'>Premium-Economy</li>,
+    <li key={2} onClick={handleClass} value='business'>Business</li>,
+    <li key={3} onClick={handleClass} value='first'>First</li>,
+    <li key={4} onClick={handleClass} value='multiple'>Multiple</li>
   ]  
 
   return (

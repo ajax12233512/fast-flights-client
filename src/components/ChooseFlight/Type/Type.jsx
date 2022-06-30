@@ -13,9 +13,9 @@ function Type() {
   }
 
   const types = [
-    <li onClick={handleType} value='one-way'>One Way</li>,
-    <li onClick={handleType} value='round-trip'>Round Trip</li>,
-    <li onClick={handleType} value='multi-city'>Multi City</li>
+    <li key={0} onClick={handleType} value='one-way'>One Way</li>,
+    <li key={1} onClick={handleType} value='round-trip'>Round Trip</li>,
+    <li key={2} onClick={handleType} value='multi-city'>Multi City</li>
   ]
 
   return (

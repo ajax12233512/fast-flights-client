@@ -1,9 +1,23 @@
 import React from 'react'
 import { searchAirports } from '../../../api/api'
+import { setDestination } from '../../../app/BookingStates/destinationSlice'
+import { setOrigin } from '../../../app/BookingStates/originSlice'
+import { useDispatch } from 'react-redux'
+
 function FormItemLoad(props) {
+
+  const dispatch = useDispatch()
 
   const handleType = (e) => {
     const value = e.target.value
+    const id = e.target.attributes.id.value
+    if(id === 'from-input'){
+      dispatch(setOrigin(value))
+    } else {
+      dispatch(setDestination(value))
+    }
+
+    
     if(value.length > 2){
       searchAirports(value)
         .then(res => {

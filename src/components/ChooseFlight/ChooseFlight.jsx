@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './ChooseFlight.css'
 import Type from './Type/Type';
 import FlightClass from './FlightClass/FlightClass';
@@ -7,15 +7,19 @@ import FormItemLoad from './utils/FormItemLoad';
 import FormItem from './utils/FormItem';
 import { useSelector } from 'react-redux';
 import { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
+import {  } from '../../app/BookingStates/passengers/adultsSlice';
+import SearchBtn from './SearchBtn/SearchBtn';
 import ChildAge from './utils/ChildAge';
 function ChooseFlight() {
+
+
     
     //TODO: Componetize this
-    const minors = useSelector(selectMinor)
+    const minors = useSelector(selectMinor).minors.length;
     let minorsList = [];
 
     for(let i = 0; i < minors; i++){
-        minorsList.push(<ChildAge />)
+        minorsList.push(<ChildAge index={i}/>)
     }
 
     return (
@@ -37,7 +41,7 @@ function ChooseFlight() {
                 <FormItem id='return-input' placeholder='Return yyyy/dd/mm'></FormItem>
             </div>
             <div className='cf-btn'>
-                <button type='submit'>Search Flights</button>
+                <SearchBtn />
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: 0,
+    value: {adults: []},
 }
 
 export const adultsSlice = createSlice({
@@ -9,11 +9,10 @@ export const adultsSlice = createSlice({
     initialState,
     reducers: {
         incrementAdults: (state, action) => {
-            state.value++;
+            return ({...state, value: {...state.value, adults: [...state.value.adults, action.payload]}})
         },
         decrementAdults: (state, action) => {
-            state.value--;
-            if(state.value < 0) state.value = 0;
+            return ({...state, value: {...state.value, adults: state.value.adults.slice(0 , state.value.adults.length - 1)}})
         }
     }
 })

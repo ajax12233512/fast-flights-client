@@ -1,7 +1,7 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { incrementAdults, decrementAdults, selectAdults } from '../../../app/BookingStates/passengers/adultsSlice'
-import { incrementMinor, decrementMinor, selectMinor } from '../../../app/BookingStates/passengers/minorSlice'
+import { useDispatch } from 'react-redux'
+import { incrementAdults, decrementAdults } from '../../../app/BookingStates/passengers/adultsSlice'
+import { incrementMinor, decrementMinor } from '../../../app/BookingStates/passengers/minorSlice'
 
 function TravelersFragment(props) {
 
@@ -11,14 +11,14 @@ function TravelersFragment(props) {
     const type = e.target.parentElement.parentElement.children[0].innerText
     if(type === 'Adults'){
       if(e.target.innerText === '+'){
-        dispatch(incrementAdults())
+        dispatch(incrementAdults({type: 'adult'}))
       } else {
-        dispatch(decrementAdults())
+        dispatch(decrementAdults({type: 'adult'}))
       }
     }
     else if(type === 'Minors'){
       if(e.target.innerText === '+'){
-        dispatch(incrementMinor())
+        dispatch(incrementMinor({age: 0}))
       } else {
         dispatch(decrementMinor())
       }

@@ -9,7 +9,7 @@ import { selectOrigin } from '../../../app/BookingStates/originSlice';
 import { selectDestination } from '../../../app/BookingStates/destinationSlice';
 import { selectLeaveDate } from '../../../app/BookingStates/datesStates/leaveDateSlice';
 import { selectReturnDate } from '../../../app/BookingStates/datesStates/returnDateSlice';
-
+import { searchFlights } from '../../../api/api';
 
 
 
@@ -17,6 +17,8 @@ function SearchBtn() {
   let minors = useSelector(selectMinor);
   let adults = useSelector(selectAdults);
   let classs = useSelector(selectClasss);
+
+  
 
   let createOfferRequest = {
     slices: [
@@ -36,10 +38,23 @@ function SearchBtn() {
     return_offers: true,
   }
 
-
+  const handleClick = async () => {
+    console.log('here')
+    try {
+      let response = await searchFlights(createOfferRequest);
+      if(response.ok) {
+        let data = await response.json();
+        console.log(data)
+      } else {
+        console.log('error')
+      }
+    } catch(err) {
+      console.log(err)
+    }
+  }
 
   return (
-    <button onClick={() => console.log(createOfferRequest)}>Search Flights</button>
+    <button onClick={handleClick}>Search Flights</button>
   )
 }
 

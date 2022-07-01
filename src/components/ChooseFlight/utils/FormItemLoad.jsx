@@ -34,10 +34,35 @@ function FormItemLoad(props) {
   }
 
   const handleClick = (e) => {
+    const type = e.target.attributes.type.value
     const dataset = e.target.dataset
-    if(dataset.iata !== '')  e.target.parentElement.previousElementSibling.children[0].value = dataset.iata
-    else e.target.parentElement.previousElementSibling.children[0].value = dataset.city
-    setNewData([])
+    if(dataset.iata !== '') {
+      e.target.parentElement.previousElementSibling.children[0].value = dataset.iata
+      setNewData([])
+    } else { 
+      e.target.parentElement.previousElementSibling.children[0].value = dataset.city
+      setNewData([])
+    }
+
+    if(type === 'from-input') {
+      if(dataset.iata !== '') {
+        e.target.parentElement.previousElementSibling.children[0].value = dataset.iata
+        dispatch(setOrigin(dataset.iata))
+      } else { 
+        e.target.parentElement.previousElementSibling.children[0].value = dataset.city
+        dispatch(setOrigin(dataset.city))
+        setNewData([])
+      }
+    } else {
+      if(dataset.iata !== '') {
+        e.target.parentElement.previousElementSibling.children[0].value = dataset.iata
+        dispatch(setDestination(dataset.iata))
+      } else { 
+        e.target.parentElement.previousElementSibling.children[0].value = dataset.city
+        dispatch(setDestination(dataset.city))
+        setNewData([])
+      }
+    }
   }
 
   return (
@@ -55,7 +80,7 @@ function FormItemLoad(props) {
       <ul className='form-item-dropdown'>
         {newData.data ? newData.data.map((item, index) => {
           return (
-            <li className='form-item-list_load' key={index} onClick={handleClick} data-iata={item.iata} data-city={item.city}>
+            <li className='form-item-list_load' key={index} onClick={handleClick} data-iata={item.iata} data-city={item.city} type={props.id}>
               {item.name}
             </li>
           )

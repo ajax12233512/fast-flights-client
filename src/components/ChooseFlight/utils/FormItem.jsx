@@ -9,8 +9,8 @@ function FormItem(props) {
   const handleType = (e) => {
     const value = e.target.value
     const id = e.target.attributes.id.value
-    if(id === 'from-input') dispatch(setLeaveDate(value)) 
-    else dispatch(setReturnDate(value))
+    if(id === 'return-input') dispatch(setReturnDate(value)) 
+    else dispatch(setLeaveDate(value))
   }
 
   return (

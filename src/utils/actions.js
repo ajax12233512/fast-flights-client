@@ -52,3 +52,18 @@ export const setFlightInput4 = (inputString, inputType) => {
         payload: { inputString, inputType } //specifies which input to change
     }
 }
+
+export const addChild = (age) => {
+    return {
+        type: 'ADD_CHILD',
+        payload: {age} 
+    }
+}
+
+export const removeChild = (age) => {
+    return {
+        type: 'ADD_CHILD',
+        payload: {age} 
+    }
+}
+    

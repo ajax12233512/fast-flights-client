@@ -2,8 +2,6 @@ import './App.css';
 import Home from './pages/Home/Home';
 import { useEffect } from 'react';
 
-
-
 function App() {
 
   useEffect(() => {

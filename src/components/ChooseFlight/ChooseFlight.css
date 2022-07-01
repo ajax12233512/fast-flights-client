@@ -80,7 +80,7 @@
     position: absolute;
     top: 13.5;
     left: 0;
-    right: 0%;
+    right: 35%;
     width: 274px;
     margin: 0 auto;
     background-color: rgb(54,81,94);
@@ -147,7 +147,7 @@
     list-style: none;
 
     top: 13.5;
-    left: 0;
+    left: 35%;
     right: 0%;
     width: 274px;
     margin: 0 auto;
@@ -220,26 +220,68 @@
 
 .child-form-group{
     /* background-color: rgba(0, 0, 0, 0.445); */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1rem;
     width: 50%;
     margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+.child-form-group label{
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .child-form-group input{
-    width: auto;
+    width: 25%;
     border: none;
     background-color: transparent;
     color: white;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.children-ages-ctn span{
+    margin: 0 20%;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.children-ages-ctn div{
+    margin: 0 1%;
 }
 
 .children-ages-ctn{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-around;
     background-color: rgba(0, 0, 0, 0.445);
+    width: 50%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.child-age{
+    font-size: 1.4rem;
+}
+
+.form-item-list_load{
+    cursor: pointer;
+    list-style: none;
+}
+
+.form-item-list_load:hover{
+    background-color: rgba(0, 0, 0, 0.445);
+    color: white;
 }
 
 @media screen and (min-width: 600px) {
     .cf-form{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 }
 

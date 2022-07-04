@@ -25,17 +25,17 @@ function SearchBtn() {
       {
         origin: useSelector(selectOrigin),
         destination: useSelector(selectDestination),
-        departureDate: useSelector(selectLeaveDate),
+        departure_date: useSelector(selectLeaveDate),
       },
       {
         origin: useSelector(selectDestination),
         destination: useSelector(selectOrigin),
-        departureDate: useSelector(selectReturnDate),
+        departure_date: useSelector(selectReturnDate),
       }
     ],
-    passengers: [adults.adults.concat(minors.minors)],
+    passengers: adults.adults.concat(minors.minors),
     cabin_class: classs,
-    return_offers: true,
+    return_offers: false,
   }
 
   const handleClick = async () => {

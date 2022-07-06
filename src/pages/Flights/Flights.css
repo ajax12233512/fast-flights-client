@@ -1,0 +1,24 @@
+.flights{
+    background-image: url('../../airplane.jpg');
+    background-size: auto;
+    height: 100vh;
+}
+
+.flights__filters-ctn{
+    position: fixed;
+    background-color: rgb(9, 0, 0, .5);
+    left: 0;
+    min-width: 10%;
+    box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.5);
+    height: 100vh;
+}
+
+.flight__card{
+
+}
+
+.flights__cards-ctn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

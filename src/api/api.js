@@ -19,3 +19,17 @@ export const searchFlights = (query) => {
         body: JSON.stringify({input: query})
     })
 }
+
+export const getFlights = (query) => {
+    return fetch('/api/duffel/getSearch', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            offerRequestId: query.offerRequestId,
+            sort: query.sort,
+        })
+    })
+}

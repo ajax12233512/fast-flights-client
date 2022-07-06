@@ -44,7 +44,9 @@ function SearchBtn() {
       let response = await searchFlights(createOfferRequest);
       if(response.ok) {
         let data = await response.json();
-        console.log(data)
+        console.log(data.data.id)
+        window.localStorage.setItem('offerRequestId', data.data.id);
+        window.location.href = '/flights';
       } else {
         console.log('error')
       }

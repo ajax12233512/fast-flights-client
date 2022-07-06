@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './Header.css';
-import { expand, condense } from '../../utils/actions';
+
 
 function Header () {
   
@@ -12,9 +12,7 @@ function Header () {
     <div className='header'>
         <div className='header-left'>
             <div className='header-menu-icon header-item'>
-                <i  
-                    className={toggleNavbar ? 'fas fa-ban' : 'fas fa-bars'}
-                    onClick={() => { toggleNavbar ? dispatch(condense()) : dispatch(expand())} }>
+                <i className={toggleNavbar ? 'fas fa-ban' : 'fas fa-bars'}>
                 </i>
             </div>
             <div className='header-logo-icon header-item'>

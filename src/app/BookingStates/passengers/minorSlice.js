@@ -4,6 +4,15 @@ const initialState = {
     value: {minors: []},
 }
 
+const returnChildItems = (numOfChildren) => {
+    let items = [];
+    for (let i = 0; i < numOfChildren; i++) {
+        items.push({age: 0})
+    }
+
+    return items;
+}
+
 export const minorSlice = createSlice({
     name: 'minor',
     initialState,
@@ -25,11 +34,14 @@ export const minorSlice = createSlice({
             if(state.value.minors[action.payload.index].age < 0) {
                 state.value.minors[action.payload.index].age = 0;
             }
+        },
+        setMinor: (state, action) => {
+            return ({...state, value: {...state.value, minors: returnChildItems(action.payload)}})
         }
 
     }
 })
 
-export const { incrementMinor, decrementMinor, incrementMinorAge, decrementMinorAge } = minorSlice.actions
+export const { incrementMinor, decrementMinor, incrementMinorAge, decrementMinorAge, setMinor } = minorSlice.actions
 export const selectMinor = state => state.minor.value
 export default minorSlice.reducer

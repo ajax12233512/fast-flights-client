@@ -8,14 +8,14 @@ import BookingForm from '../../components/BookingForm/BookingForm';
 function Home() {
   
   return (
-    <div id="booking" class="section">
-		<div class="section-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
+    <div id="booking" className="section">
+		<div className="section-center">
+			<div className="container">
+				<div className="row">
+					<div className="col-md-4">
 						<Hero />
 					</div>
-					<div class="col-md-7 col-md-offset-1">
+					<div className="col-md-7 col-md-offset-1">
 						<BookingForm />
 					</div>
 				</div>

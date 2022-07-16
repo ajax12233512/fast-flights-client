@@ -3,13 +3,35 @@
 	height: 100vh;
 }
 
+
+
 .section .section-center {
 	position: absolute;
 	top: 50%;
 	left: 0;
 	right: 0;
-	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
+}
+
+@media (max-width: 992px) {
+	.section {
+
+	}
+
+	.section .section-center {
+		position: static;
+		top: 0;
+		left: 0;
+		right: 0;
+		transform: translateY(0);
+	}
+
+	#booking {
+		background-repeat: repeat-y;
+		background-size: cover;
+		/* max-height: 1000px; */
+		height: auto;
+	}
 }
 
 #booking {

@@ -5,9 +5,15 @@ import FormGroup from './FormGroup'
 import { 
     adultsOptionsList, 
     childrenOptionsList, 
-    classOptionsList 
-} from './utils/utils.js'
+    classOptionsList,
+    generateMinorRows
+} from './utils/utils.js';
+import { useSelector } from 'react-redux';
+import minorSlice, { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
+
 function BookingForm() {
+
+  const minor = useSelector(selectMinor);
   return (
     <div className="booking-form">
     <form>
@@ -26,6 +32,10 @@ function BookingForm() {
             <FormGroup label="Adults (18+)" type="select" options={adultsOptionsList}/>
             <FormGroup label="Children (0-17)" type="select" options={childrenOptionsList}/>
             <FormGroup label="Travel class" type="select" options={classOptionsList}/>
+            {
+                // console.log(minor.minors.length)
+                minor.minors.length > 0 ? generateMinorRows(minor.minors.length) : null
+            }
         </div>
         <div className="form-btn">
             <button className="submit-btn">Show flights</button>

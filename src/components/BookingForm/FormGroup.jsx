@@ -27,11 +27,11 @@ function FormGroup(props) {
     }
 
     const handleSelect = (e) => {
-        const label = e.target.parentElement.previousSibling.innerText.toLowerCase();
-        console.log(label)
+        const label = e.target.previousSibling.innerText.toLowerCase();
         switch (label) {
             case 'adults (18+)': dispatch(setAdults(e.target.value)); break;
             case 'children (0-17)': dispatch(setMinor(e.target.value)); break;
+            default: break;
         }
     }
 
@@ -60,9 +60,9 @@ function FormGroup(props) {
                 <div className="col-md-4">
                     <div className="form-group">
                         <span className="form-label">{props.label}</span>
-                        <select className="form-control">
+                        <select className="form-control" onChange={handleSelect}>
                             {props.options.map((option, index) => {
-                                return <option key={index} onClick={handleSelect}>{option}</option>
+                                return <option key={index}>{option}</option>
                             })}
                         </select>
                         <span className="select-arrow"></span>

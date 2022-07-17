@@ -10,7 +10,7 @@ import {
     generateMinorRows
 } from './utils/utils.js';
 import { useSelector } from 'react-redux';
-import minorSlice, { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
+import { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
 import { setMinorAge } from '../../app/BookingStates/passengers/minorSlice';
 import BookingFormBtn from './BookingFormBtn';
 

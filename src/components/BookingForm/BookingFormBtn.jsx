@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
 import { selectAdults } from '../../app/BookingStates/passengers/adultsSlice';
-import { selectType } from '../../app/BookingStates/typeSlice';
 import { selectClasss } from '../../app/BookingStates/classSlice';
 import { selectOrigin } from '../../app/BookingStates/originSlice';
 import { selectDestination } from '../../app/BookingStates/destinationSlice';

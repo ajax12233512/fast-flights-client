@@ -18,8 +18,6 @@ function SearchBtn() {
   let adults = useSelector(selectAdults);
   let classs = useSelector(selectClasss);
 
-  
-
   let createOfferRequest = {
     slices: [
       {
@@ -38,21 +36,9 @@ function SearchBtn() {
     return_offers: false,
   }
 
-  const handleClick = async () => {
-    console.log('here')
-    try {
-      let response = await searchFlights(createOfferRequest);
-      if(response.ok) {
-        let data = await response.json();
-        console.log(data.data.id)
-        window.localStorage.setItem('offerRequestId', data.data.id);
-        window.location.href = '/flights';
-      } else {
-        console.log('error')
-      }
-    } catch(err) {
-      console.log(err)
-    }
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log(createOfferRequest)
   }
 
   return (

@@ -12,6 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import minorSlice, { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
 import { setMinorAge } from '../../app/BookingStates/passengers/minorSlice';
+import BookingFormBtn from './BookingFormBtn';
 
 function BookingForm() {
 
@@ -44,9 +45,7 @@ function BookingForm() {
                 minor.minors.length > 0 ? generateMinorRows(minor.minors.length, setMinorAgeCall, minor.minors) : null
             }
         </div>
-        <div className="form-btn">
-            <button className="submit-btn">Show flights</button>
-        </div>
+        <BookingFormBtn />
     </form>
 </div>
   )

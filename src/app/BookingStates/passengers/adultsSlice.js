@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: {adults: []},
+    value: {adults: [{type : 'adult'}]},
 }
 
 const returnAdultItems = (numOfAdults) => {

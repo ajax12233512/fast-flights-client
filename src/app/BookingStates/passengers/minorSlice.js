@@ -37,11 +37,14 @@ export const minorSlice = createSlice({
         },
         setMinor: (state, action) => {
             return ({...state, value: {...state.value, minors: returnChildItems(action.payload)}})
+        },
+        // returnChildItems(action.payload)
+        setMinorAge: (state, action) => {
+            state.value.minors[action.payload.key].age = action.payload.value; 
         }
-
     }
 })
 
-export const { incrementMinor, decrementMinor, incrementMinorAge, decrementMinorAge, setMinor } = minorSlice.actions
+export const { incrementMinor, decrementMinor, incrementMinorAge, decrementMinorAge, setMinor, setMinorAge } = minorSlice.actions
 export const selectMinor = state => state.minor.value
 export default minorSlice.reducer

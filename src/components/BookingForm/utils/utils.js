@@ -14,14 +14,15 @@ export const childAgeOptionsList = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
 ]
 
-export const generateMinorRows = (numOfChildren) => {
+export const generateMinorRows = (numOfChildren, changeFunc, currentState) => {
+
     let items = [];
     for (let i = 0; i < numOfChildren; i++) {
         items.push(
             <div className="col-md-4 col-sm-4">
                 <div className="form-group">
                     <span className="form-label">Child Age</span>
-                    <select className="form-control">
+                    <select className="form-control" data-key={i} onChange={changeFunc} value={currentState[i].age}>
                         {childAgeOptionsList.map((option, index) => {
                             return <option key={index} >{option}</option>
                         })}

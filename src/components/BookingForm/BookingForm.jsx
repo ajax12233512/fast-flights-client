@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import './BookingForm.css'
 import FormCheckbox from './FormCheckbox'
 import FormGroup from './FormGroup'
@@ -10,9 +11,15 @@ import {
 } from './utils/utils.js';
 import { useSelector } from 'react-redux';
 import minorSlice, { selectMinor } from '../../app/BookingStates/passengers/minorSlice';
+import { setMinorAge } from '../../app/BookingStates/passengers/minorSlice';
 
 function BookingForm() {
 
+  const dispatch = useDispatch();
+  const setMinorAgeCall = (e) => {
+    const key = e.target.dataset.key;
+    dispatch(setMinorAge({ key, value: e.target.value }));
+  };
   const minor = useSelector(selectMinor);
   return (
     <div className="booking-form">
@@ -34,7 +41,7 @@ function BookingForm() {
             <FormGroup label="Travel class" type="select" options={classOptionsList}/>
             {
                 // console.log(minor.minors.length)
-                minor.minors.length > 0 ? generateMinorRows(minor.minors.length) : null
+                minor.minors.length > 0 ? generateMinorRows(minor.minors.length, setMinorAgeCall, minor.minors) : null
             }
         </div>
         <div className="form-btn">

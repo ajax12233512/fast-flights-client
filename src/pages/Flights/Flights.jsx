@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { getFlights } from '../../api/api.js'
 import './Flights.css';
 import Cards from '../../components/Flights/Cards/Cards.jsx';
+import Card from '../../components/Card/Card.jsx';
 function Flights() {
 
   const [dataRef, setDataRef] = useState([])
@@ -40,9 +41,9 @@ function Flights() {
       <div className='flights__cards-ctn'>
       {dataRef !== [] ? dataRef.map((flight, index) => {
           return (
-            <Cards>
+            <Card>
               {flight}
-            </Cards>
+            </Card>
           )
         }) : <div>Loading</div>}
       </div>

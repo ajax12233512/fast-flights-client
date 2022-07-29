@@ -1,5 +1,6 @@
 import React from 'react'
-import './Card.css'
+// import './Card.css'
+import './CardTemplateStyle.css'
 function Card({ children }) {
 
     /* .property-image
@@ -31,22 +32,17 @@ function Card({ children }) {
     }
 
     return (
-        <div className="center">
-            <div className="property-card">
-                <a href="/">
-                    <div className="property-image" style={projectImageStyle}>
-                        <div className="property-image-title">
-
-                        </div>
-                    </div></a>
-                <div className="property-description">
-                    <h5>{children.owner.name}</h5>
-                    <p>{children.owner.iata_code}</p>
-                </div>
-                <a href="/">
-                    <div className="property-social-icons">
-                    </div>
-                </a>
+        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+            <figure className="effect-ming tm-video-item">
+                <img src={children.owner.logo_symbol_url} alt="Logo of selected airline" className="img-fluid" />
+                <figcaption className="d-flex align-items-center justify-content-center">
+                    <h2>{children.owner.name}</h2>
+                    <a href="photo-detail.html">{children.owner.iata_code}</a>
+                </figcaption>
+            </figure>
+            <div className="d-flex justify-content-between tm-text-gray">
+                <span className="tm-text-gray-light">18 Oct 2020</span>
+                <span>9,906 views</span>
             </div>
         </div>
     )

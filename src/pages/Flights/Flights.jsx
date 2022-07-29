@@ -13,14 +13,14 @@ function Flights() {
   let requestId = window.localStorage.getItem('offerRequestId');
   console.log(requestId)
 
-  useEffect(() => { 
+  useEffect(() => {
     const response = async function () {
       return await getFlights({
         offerRequestId: requestId,
         sort: 'total_amount'
       });
     }
-    
+
     response().then(res => {
       return res.json()
     }).then(data => {
@@ -33,19 +33,24 @@ function Flights() {
   }, [])
 
 
-  
+
 
   return (
     <div className='flights'>
       <div className='flights__filters-ctn'></div>
-      <div className='flights__cards-ctn'>
-      {dataRef !== [] ? dataRef.map((flight, index) => {
-          return (
-            <Card>
-              {flight}
-            </Card>
-          )
-        }) : <div>Loading</div>}
+      <div className='flights__cards-ctn '>
+        <div className='container-fluid tm-container-content tm-mt-60'>
+          <div className='row tm-mb-90 tm-gallary'>
+            {dataRef !== [] ? dataRef.map((flight, index) => {
+              return (
+                <Card>
+                  {flight}
+                </Card>
+              )
+            }) : <div>Loading</div>}
+          </div>
+        </div>
+
       </div>
     </div>
   )
